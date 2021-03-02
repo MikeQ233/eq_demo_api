@@ -12,7 +12,6 @@ setInterval(() => {
     ob.clean_cache(new Date().getTime);
   })
 }, 1*minute)
-console.log(process.env);
 const app = express()
 app.use(cors());
 // configs come from standard PostgreSQL env vars
