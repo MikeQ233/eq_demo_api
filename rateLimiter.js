@@ -4,8 +4,6 @@
 * local memory. I Token bucket approach. I found it on
 * https://blog.logrocket.com/rate-limiting-node-js/
 * This blog also explains other types of rate limit algorithms.
-* For scalability, a key value pair database like Redis should
-* be used to implement the rate limiter.
 */
 
 class RateLimiter {
