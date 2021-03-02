@@ -6,7 +6,7 @@ const pg = require('pg');
 const { RateLimiter, second, minute } = require("./rateLimiter");
 const rateLimiterArray = [];
 
-// clean cache every 1 minue
+// clean cache every 1 minue to free up space
 setInterval(() => {
   rateLimiterArray.forEach(ob => {
     ob.clean_cache(new Date().getTime);
@@ -24,6 +24,7 @@ const queryHandler = (req, res, next) => {
   }).catch(next)
 }
 
+// make a new RateLimiter for each api requests 
 function getRateLimitHandler () {
   const rateLimiter = new RateLimiter(5*second, 5);
   rateLimiterArray.push(rateLimiter);

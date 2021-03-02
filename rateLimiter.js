@@ -1,3 +1,13 @@
+
+/*
+* simple implementation of the rate limiter using
+* local memory. I Token bucket approach. I found it on
+* https://blog.logrocket.com/rate-limiting-node-js/
+* This blog also explains other types of rate limit algorithms.
+* For scalability, a key value pair database like Redis should
+* be used to implement the rate limiter.
+*/
+
 class RateLimiter {
     constructor(interval, set_num) {
         this.interval = interval;
@@ -5,6 +15,8 @@ class RateLimiter {
         this.map = new Map();
     }
 
+    // given id and timestamp check the bucket. If
+    // no bucket exists, create one.
     check_limit(id, timestamp) {
         const item = this.map.get(id);
         if (item) {
@@ -32,6 +44,8 @@ class RateLimiter {
         }
     }
 
+    // clean cache. It will only clean records that are 
+    // irrelevant.
     clean_cache(timestamp) {
         this.map.forEach((value, key) => {
             if (timestamp > value.timestamp) {
